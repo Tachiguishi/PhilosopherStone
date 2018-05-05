@@ -24,12 +24,18 @@
     <ClCompile Include="TestService.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MTask.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ServiceBase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TestService.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MTask.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -143,11 +143,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="MTask.cpp" />
     <ClCompile Include="ServiceBase.cpp" />
     <ClCompile Include="TestService.cpp" />
     <ClCompile Include="winService.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="MTask.h" />
     <ClInclude Include="ServiceBase.h" />
     <ClInclude Include="TestService.h" />
   </ItemGroup>
