@@ -38,4 +38,17 @@ private:
 	};
 };
 
+// RAII
+class task_guard {
+private:
+	MTask& m_task;
+
+public:
+	task_guard(MTask& task) :m_task(task) { m_task.EntryTask(); }
+	~task_guard() { m_task.LeaveTask(); }
+
+	task_guard(task_guard const&) = delete;
+	task_guard& operator=(task_guard const&) = delete;
+};
+
 #endif // !__MTask_H__

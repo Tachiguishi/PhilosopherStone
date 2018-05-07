@@ -35,7 +35,7 @@ void TestService::kill_service_thread()
 
 void TestService::service_main_fun()
 {
-	m_task.EntryTask();
+	task_guard guard(m_task);
 
 	while (true)
 	{
@@ -51,6 +51,4 @@ void TestService::service_main_fun()
 		// do something here
 		int i = 0;
 	}
-
-	m_task.LeaveTask();
 }
