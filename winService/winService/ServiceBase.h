@@ -19,6 +19,8 @@ public:
 
 	BOOL RegisterService();
 	BOOL RemoveService();
+	BOOL StartRegisterService();
+
 	BOOL RunService();
 
 	char* GetServiceName() { return m_serviceName; };

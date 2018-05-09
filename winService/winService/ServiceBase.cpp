@@ -96,6 +96,59 @@ BOOL ServiceBase::RemoveService()
 	return FALSE;
 }
 
+BOOL ServiceBase::StartRegisterService()
+{
+	BOOL bResult = FALSE;
+
+	// open service manager
+	SC_HANDLE hSCM = ::OpenSCManager(NULL, NULL, SC_MANAGER_ALL_ACCESS);
+
+	if (hSCM == NULL)
+	{
+		return bResult;
+	}
+
+	// get service handle
+	SC_HANDLE hService = ::OpenService(hSCM, m_serviceName, SC_MANAGER_ALL_ACCESS);
+	if (hService == NULL)
+	{
+		::CloseServiceHandle(hSCM);
+		MessageBox(NULL, TEXT("Couldn't open service"), TEXT(m_serviceName), MB_OK);
+		return bResult;
+	}
+
+	// query service status
+	SERVICE_STATUS	service_status;
+	printf_s("query service status.\n");
+	if (QueryServiceStatus(hService, &service_status))
+	{
+		if (service_status.dwCurrentState == SERVICE_RUNNING)
+		{
+			bResult = TRUE;
+		}
+		// service is not running, start service
+		else if (StartService(hService, 0, NULL))
+		{
+			bResult = TRUE;
+		}
+		else
+		{
+			DWORD nError = GetLastError();
+			printf_s("service start fail. %d\n", nError);
+		}
+	}
+	else
+	{
+		DWORD nError = GetLastError();
+		printf_s("service status query fail. %d\n", nError);
+	}
+
+	::CloseServiceHandle(hService);
+	::CloseServiceHandle(hSCM);
+
+	return bResult;
+}
+
 BOOL ServiceBase::RunService()
 {
 	return runService(this);
